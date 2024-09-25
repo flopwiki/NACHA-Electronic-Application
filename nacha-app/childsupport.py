@@ -1,5 +1,3 @@
-from functools import reduce
-
 '''
 User GUI for Electronic Child Support Payments
 
@@ -188,6 +186,14 @@ def workflow_b(employerId: str, employee_bank_id: str, remittance: float) -> str
 
 def workflow_by_state(state_id_1: str, state_id_2: str, sdu_bank_1_id: str, sdu_bank_2_id: str, acct: str) -> str:
     pass
+
+def get_record_for_account(account: str, recd: dict, target: str) -> str:
+    # search record for target and return the string representation
+    pass
+
+def get_record_size():
+    pass
+
 
 SDU_bank_2_name = "Child Support | Florida"
 account_id = "12344"
