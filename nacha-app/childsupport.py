@@ -178,21 +178,82 @@ is_scanned = False
         - SDU_bank_2 send via ACH network to account
        
 '''
-def workflow_sdu(payment:float, instr: str, acct: str, branch: str) -> RECORD:
-    pass
+class Account:
+    def __init__(self, acc_id, acc_rn):
+        self.acc_id = acc_id
+        self.acc_rn = acc_rn
 
-def workflow_b(employerId: str, employee_bank_id: str, remittance: float) -> str:
-    pass
+    def check_balance():
+        pass
 
-def workflow_by_state(state_id_1: str, state_id_2: str, sdu_bank_1_id: str, sdu_bank_2_id: str, acct: str) -> str:
-    pass
+    def release_payement():
+        pass
 
-def get_record_for_account(account: str, recd: dict, target: str) -> str:
-    # search record for target and return the string representation
-    pass
+    def recieve_payment():
+        pass
 
-def get_record_size():
-    pass
+
+class Employer:
+    def __init__(self, emp_id):
+        self.emp_id = emp_id
+
+    def get_notification():
+        pass
+
+    def get_employee_wage():
+        pass
+
+    def determin_payment_format():
+        default_fmt = "CDD+"
+        return default_fmt
+
+
+class State:
+
+    check_list = [CA, FL, GU, IA, IL, IN, MA, OH, OR, ND, NE, NV, PA, TX, VA, WV]
+
+    def set_notification(notice: str):
+        pass
+
+    def set_state_id(state_id: str):
+        pass
+
+    def set_withheld_wage(emplr_id: int, emple_id: int, amnt: float):
+        pass
+
+
+class Process:
+    
+    def transfer_funds():
+        pass
+
+    def transfer_data():
+        pass
+
+    def transmit_payment_remitt_instr():
+        pass
+
+
+class WorkFlow:
+
+    def __init__(self, sdu_id: str, sdu_bank_id: int, account_id: str, employer_id: str, bank_id: str, state_id: str):
+        pass
+
+    def workflow_sdu(payment:float, instr: str, acct: str, branch: str) -> RECORD:
+        pass
+
+    def workflow_b(employerId: str, employee_bank_id: str, remittance: float) -> str:
+        pass
+
+    def workflow_by_state(state_id_1: str, state_id_2: str, sdu_bank_1_id: str, sdu_bank_2_id: str, acct: str) -> str:
+        pass
+
+    def get_record_for_account(account: str, recd: dict, target: str) -> str:
+        # search record for target and return the string representation
+        pass
+
+    def get_record_size():
+        pass
 
 
 SDU_bank_2_name = "Child Support | Florida"
