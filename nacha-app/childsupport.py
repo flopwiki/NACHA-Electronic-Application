@@ -202,24 +202,3 @@ def instituion_post(funds: int) -> str:
 '''
 9: NACHA Record Formats
 '''
-
-def add_two(x: int, y: int) -> int:
-    return x + y
-
-
-# working with map 
-answer = list(map(add_two,[2, 2], [3, 3])) # returns [5 , 5]
-
-
-# working with lambda
-question = lambda text : text.capitalize()
-
-
-# working with reduce
-reducer = reduce(add_two, [1,2,3,10])
-
-
-
-print(answer)
-print(reducer)
-print(question('what is the answer to life?'))
