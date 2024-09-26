@@ -1,0 +1,51 @@
+Classes:
+- CaseAccount
+- SDUBank
+- SDUBranch
+- EmployerBank
+- Employer
+- EmployerState
+- Employee
+- EmployeeBank
+
+
+
+Expand Logic: Add more business logic (e.g., error handling, state-specific rules).
+Implement ACH Format: Define what the ACH format looks like (e.g., CCD+ or CTX/820) and process it.
+Notification System: Use the Employer and State classes to implement notification handling.
+Banking Operations: Flesh out how funds move between banks and the SDUs.
+
+NOTE:
+The MVP would likely include core ACH payment processing, account management, basic UI, and state notification workflows
+Scope of MVP
+The MVP should include:
+
+Basic user interface for payments and account management
+ACH payment processing with minimal formats (e.g., CCD+)
+SDU workflow handling (at least one state's compliance)
+Simple employer notification system
+Database integration for payment logs and user data
+
+
+IDEAL STRUCTURE:
+
+child-support-system/
+│
+├── README.md
+├── requirements.txt        # Dependencies (e.g., Flask, pytest, SQLAlchemy)
+├── setup.py                # Package setup (optional for now)
+├── src/                    # Your actual application code
+│   ├── __init__.py
+│   ├── account.py          # Handle account-related logic
+│   ├── payments.py         # ACH and payment logic
+│   └── workflows.py        # Workflow logic (SDU, employer, etc.)
+├── tests/                  # Unit and integration tests
+│   ├── __init__.py
+│   ├── test_account.py     # Tests for account logic
+│   ├── test_payments.py    # Tests for payment logic
+│   └── test_workflows.py   # Tests for workflows
+├── .gitignore              # Ignore unnecessary files
+└── .github/
+    └── workflows/          # If you use GitHub Actions for CI/CD
+
+
