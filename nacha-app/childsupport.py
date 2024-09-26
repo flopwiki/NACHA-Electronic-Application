@@ -179,19 +179,25 @@ is_scanned = False
        
 '''
 class Account:
-    def __init__(self, acc_id, acc_rn):
-        self.acc_id = acc_id
-        self.acc_rn = acc_rn
+    def __init__(self, acc_id, acc_bal=0.0):
+        self.acc_id = acc_id # Account ID
+        self.acc_bal = acc_bal # Initial account balance
 
-    def check_balance():
-        pass
+    def check_balance(self):
+        '''Return the current account balance'''
+        return f"Account {self.acc_id} currently has {self.acc_bal:.2f} available."
 
-    def release_payement():
-        pass
+    def recieve_payement(self, acc_credit):
+        '''Credit a payment to the account with recieved payment.'''
+        self.acc_bal += acc_credit
+        # implement logging and trigger email/notification
 
-    def recieve_payment():
-        pass
-
+    def release_payment(self, acc_debit):
+        '''Debit a payment from the account if funds are available'''
+        if acc_debit > self.balance:
+            break
+        self.balance -= acc_debit
+        # implement logging and email notifications
 
 class Employer:
     def __init__(self, emp_id):
@@ -234,13 +240,37 @@ class Process:
         pass
 
 
+
+class SDUBank:
+    def __init__(self, branch_id, acc_bal=9999):
+        self.branch_id = branch_id
+        self.acc_bal = acc_bal
+
+    def release_funds():
+        pass
+
+    def receive_funds():
+        pass
+
+    def update_account_details(self, acc_id, details):
+        pass
+
 class WorkFlow:
 
-    def __init__(self, sdu_id: str, sdu_bank_id: int, account_id: str, employer_id: str, bank_id: str, state_id: str):
-        pass
+    def __init__(self, sdu_bank_id, cs_acc_id):
+        self.sdu_bank_id = sdu_bank_id # SDU Bank ID
+        self.cs_acc_id = cs_acc_id # Account ID
 
-    def workflow_sdu(payment:float, instr: str, acct: str, branch: str) -> RECORD:
-        pass
+    def workflow_sdu(self, payment_amount):
+        account = Account(self.acc_id) # Use the Account class
+
+        # Receive Payment
+        account.receive_payment(payment_amount)
+
+        # Credit the SDU account
+        
+        # Relese funds
+        return
 
     def workflow_b(employerId: str, employee_bank_id: str, remittance: float) -> str:
         pass
