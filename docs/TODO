@@ -1,12 +1,40 @@
 Classes:
-- CaseAccount
-- SDUBank
-- SDUBranch
-- EmployerBank
-- Employer
-- EmployerState
-- Employee
-- EmployeeBank
+
+
+Methods:
+Methods Explanation:
+Class Name	Method Name	Explanation	Type
+ACHFormat	validate_format()	Validates if the given data complies with NACHA CCD+ or CTX format standards.	Business Logic
+generate_ach_record()	Generates an ACH record using the provided payment and remittance details according to the appropriate format.	System Operation
+parse_ach_data()	Parses incoming ACH data to extract remittance details and payment information.	System Operation
+Transaction	initiate()	Begins the payment transaction process, collecting all relevant data.	Business Logic
+validate()	Checks the validity of the transaction data (e.g., amount, remittance details) before processing.	Business Logic
+process()	Executes the payment through the appropriate network or system, applying business rules.	System Operation
+Employee	provide_payment_details()	Employee submits necessary payment information to the system.	Business Logic
+submit_payment()	Employee sends the payment to the SDU via the ACH network.	System Operation
+Employer	withhold_wages()	Employer withholds wages based on a state-issued child support order.	Business Logic
+submit_to_bank()	Employer submits the withheld wages as a payment instruction to its bank.	System Operation
+State	issue_order()	State issues an official child support withholding order to an employer.	Business Logic
+notify_employer()	Notifies the employer of the obligation to withhold wages for child support.	Business Logic
+verify_payment()	Verifies that the payment has been received and processed by the SDU.	Business Logic
+SDU	update_records()	Updates the internal records of child support payments and remittances.	System Operation
+credit_account()	Credits the custodial account with the child support payment received.	Business Logic
+disburse_payment()	Sends the payment to the custodial parent’s bank account.	System Operation
+SDUBank	send_remittance()	Transmits remittance advice to the SDU.	System Operation
+process_payment_instructions()	Processes the payment instructions received from the SDU or employer bank.	System Operation
+handle_ach_transmission()	Manages the transmission of ACH records to and from the ACH network.	System Operation
+Bank	transfer_funds()	Facilitates the transfer of child support funds to the SDU or custodial parent via ACH.	System Operation
+validate_ach_entries()	Ensures that the ACH entries meet NACHA compliance before initiating a transfer.	Business Logic
+send_ach_records()	Sends the ACH records to the network for processing.	System Operation
+ACHNetwork	transmit_payment()	Handles the transmission of payment and remittance data across the network to the SDU or SDU bank.	System Operation
+validate_transaction()	Validates that the transaction complies with the necessary standards (ACH, EDI, NACHA).	Business Logic
+track_payment()	Tracks the progress of a payment through the network, from initiation to completion.	System Operation
+InterstatePayment	coordinate_sdu_transfer()	Ensures correct payment transfer between two SDUs located in different states.	Business Logic
+validate_interstate_routing()	Confirms that interstate payments are routed correctly between SDUs and banks.	Business Logic
+Workflow	execute()	Executes the defined workflow (a, b, SDU, by_state) depending on the transaction scenario.	Business Logic
+track_progress()	Monitors the workflow’s progress to ensure smooth processing and alerts any errors.	System Operation
+log_activity()	Logs all activities in the workflow for audit and tracking purposes.	System Operation
+
 
 
 
@@ -14,6 +42,12 @@ Expand Logic: Add more business logic (e.g., error handling, state-specific rule
 Implement ACH Format: Define what the ACH format looks like (e.g., CCD+ or CTX/820) and process it.
 Notification System: Use the Employer and State classes to implement notification handling.
 Banking Operations: Flesh out how funds move between banks and the SDUs.
+
+
+Types of Methods:
+Business Logic: Handles the rules and decision-making processes of the child support payment system. These include payment validation, issuing orders, and coordinating interstate payments.
+
+System Operations: These methods handle system interactions, such as sending data to the ACH network, parsing files, and tracking payments. They involve lower-level operations necessary for the application to function but are not decision-making points in the business process.
 
 NOTE:
 The MVP would likely include core ACH payment processing, account management, basic UI, and state notification workflows
@@ -49,3 +83,17 @@ child-support-system/
     └── workflows/          # If you use GitHub Actions for CI/CD
 
 
+
+
+Class Name	Description	Folder	Parent/Child	Associated Methods
+ACHFormat	Represents the ACH format standards used for payments, covering the NACHA CCD+ and CTX formats.	formats	X	validate_format(), generate_ach_record(), parse_ach_data()
+Transaction	Represents an individual child support payment transaction.	transactions	X	initiate(), validate(), process()
+Employee	Represents an employee making child support payments through the employer.	entities	X	provide_payment_details(), submit_payment()
+Employer	Represents the employer responsible for withholding wages for child support payments.	entities	X	withhold_wages(), submit_to_bank()
+State	Represents the state authority, responsible for initiating child support orders and coordinating with SDUs and employers.	entities	X	issue_order(), notify_employer(), verify_payment()
+SDU	Represents a State Disbursement Unit (SDU) handling payments and remittance information for child support.	entities	Parent of SDUBank	update_records(), credit_account(), disburse_payment()
+SDUBank	Represents the bank associated with the SDU for processing ACH transactions and remittance information.	entities	Child of SDU	send_remittance(), process_payment_instructions(), handle_ach_transmission()
+Bank	Represents the financial institutions (employer/employee) responsible for originating ACH transfers to the SDU.	entities	X	transfer_funds(), validate_ach_entries(), send_ach_records()
+ACHNetwork	Represents the ACH network facilitating payments between banks and SDUs.	network	X	transmit_payment(), validate_transaction(), track_payment()
+InterstatePayment	Represents payments involving two SDUs in different states, ensuring correct routing between banks and SDUs.	transactions	X	coordinate_sdu_transfer(), validate_interstate_routing()
+Workflow	Represents the workflows (a, b, sdu, by_state) for different scenarios of payment transmission.	workflows	X	execute(), track_progress(), log_activity()
